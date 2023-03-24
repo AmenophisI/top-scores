@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/top-scores', function () {
+    return view('welcome');
+});
+Route::post('/top-scores','\App\Http\Controllers\ScoresController@getCl')->name('regist');
