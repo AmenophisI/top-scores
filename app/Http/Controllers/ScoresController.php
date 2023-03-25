@@ -9,13 +9,13 @@ class ScoresController extends Controller
 {
     public function registScore($data)
     {
-        player::truncate();
         for ($i = 0; $i < 20; $i++) {
             $player = new player;
             $player->name = $data["response"][$i]['player']['name'];
             $player->league = $data["response"][$i]['statistics'][0]["league"]["name"];
             $player->team = $data["response"][$i]['statistics'][0]['team']['name'];
             $player->goals = $data["response"][$i]['statistics'][0]['goals']['total'];
+            // Player::where('league', '=', $player->league)->delete();
             $player->save();
         }
     }
@@ -62,6 +62,7 @@ class ScoresController extends Controller
     }
     public function getPremire()
     {
+        Player::where('league', '=', 'Premier League')->delete();
         $option = $this->getHeader();
         $url = "https://v3.football.api-sports.io/players/topscorers?season=2022&league=39";
         $context = stream_context_create($option);
@@ -71,6 +72,7 @@ class ScoresController extends Controller
     }
     public function getLiga()
     {
+        Player::where('league', '=', 'La Liga')->delete();
         $option = $this->getHeader();
         $url = "https://v3.football.api-sports.io/players/topscorers?season=2022&league=140";
         $context = stream_context_create($option);
@@ -80,6 +82,7 @@ class ScoresController extends Controller
     }
     public function getOne()
     {
+        Player::where('league', '=', 'Ligue 1')->delete();
         $option = $this->getHeader();
         $url = "https://v3.football.api-sports.io/players/topscorers?season=2022&league=41";
         $context = stream_context_create($option);
@@ -89,6 +92,7 @@ class ScoresController extends Controller
     }
     public function getBundes()
     {
+        Player::where('league', '=', 'Bundesliga')->delete();
         $option = $this->getHeader();
         $url = "https://v3.football.api-sports.io/players/topscorers?season=2022&league=78";
         $context = stream_context_create($option);
@@ -98,6 +102,7 @@ class ScoresController extends Controller
     }
     public function getSerie()
     {
+        Player::where('league', '=', 'Serie A')->delete();
         $option = $this->getHeader();
         $url = "https://v3.football.api-sports.io/players/topscorers?season=2022&league=135";
         $context = stream_context_create($option);
